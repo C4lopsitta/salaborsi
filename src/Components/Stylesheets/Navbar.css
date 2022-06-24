@@ -1,0 +1,325 @@
+/*************************/
+/** Navbar styling       */
+/*************************/
+
+nav{
+   width: calc(100% - 2rem);
+   height: 4rem;
+   margin: 1rem;
+   border-radius: .5rem;
+   background-color: var(--secondary);
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   transition: .5s;
+   animation: navToSmall cubic-bezier(.79,.14,.15,.86) infinite;
+}
+
+/*? Navbar styling when scrolling in page */
+.navOnScroll{
+   width: 100% !important;
+   position: fixed !important;
+   height: 4rem !important;
+   margin: 0 !important;
+   border-radius: 0 !important;
+   z-index: 9999;
+}
+
+nav .navTitle h2{
+   margin: 1rem;
+   font-family: 'Nunito', sans-serif;
+   font-weight: 900;
+}
+
+.navLinks{
+   display: inline-flex;
+}
+
+.navLinks a{
+   height: 4rem;
+   width: 8rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.navLinks span{
+   height: 4rem;
+   width: 4rem;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+}
+
+.hidden{
+   display: none;
+}
+.navFixed{
+   position: fixed;
+}
+.navPlaceholder{
+   display: block;
+   height: 6rem;
+}
+
+/*************************/
+/** Navbar mobile styling*/
+/*************************/
+
+.navMobile{
+   position: fixed;
+   display: grid !important;
+   z-index: 99999;
+   bottom: 0rem;
+   grid-template-columns: repeat(4, 1fr);
+   grid-template-rows: 1fr;
+   padding: 0 .25rem;
+   box-shadow: rgba(0, 0, 0, 0.205) 0 0 1rem .1rem ;
+   width: calc(100% - 2.5rem);
+   transition: .2s;
+}
+.navIcon{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   cursor: pointer;
+   border-radius: 1rem;
+   height: calc(100% - .5rem);
+   transition: .4s;
+   user-select: none;
+   -webkit-tap-highlight-color: transparent;
+}
+
+.navIconFade{
+   animation: navIconFade .2s ease-out forwards;
+}
+.navTopMarginMobile{
+   display: block;
+   height: 1rem;
+   content: '';
+}
+.navCurrentPos{
+   animation: ease-in ani_navCurrentPos forwards .15s .1s;
+   background-color: inherit;
+   border-radius: 1rem;
+}
+/** styling barra di ricerca mobile */
+.navSearchBar{
+   display: block !important;
+   padding: 0 .25rem;
+   box-shadow: rgba(0, 0, 0, 0.475) 0 0 1rem .1rem ;
+}
+.navSearchBar span:nth-child(5){
+   display: grid;
+   grid-template-columns: 1fr 4rem;
+   justify-content: center;
+   align-items: center;
+}
+.navSearchInput{
+   width: calc(100% - 2rem);
+   margin: 1rem .25rem;
+   padding: 0 .75rem;
+   background-color: transparent;
+   border: none;
+   height: 2rem;
+   font-size: 1rem;
+   -webkit-tap-highlight-color: transparent;
+   border-radius: .25rem;
+}
+.navSearchInput:focus{
+   outline: none;
+}
+.navSearchIcon{
+   animation: searchOpen .2s ease-out forwards;
+   transition: .4s;
+}
+.navSearchIcon_close{
+   animation: searchClose .2s ease-in forwards;
+}
+
+/*************************/
+/** Navbar animations    */
+/*************************/
+
+@keyframes ani_navCurrentPos {
+   from{
+      background-color: inherit;
+      border-radius: 1rem;
+   }
+   to{
+      background-color: var(--accent);
+      border-radius: .35rem;
+   }
+}
+@keyframes navIconFade {
+   from{
+      filter: blur(2px);
+   }
+   to{
+      filter: blur(0);
+   }
+}
+@keyframes searchOpen {
+   from{
+      transform: translateX(-6px);
+      background-color: inherit;
+      border-radius: 1rem;
+   }
+   to{
+      transform: translateX(0);
+      background-color: var(--accent);
+      border-radius: .35rem;
+   }
+}
+@keyframes searchClose {
+   from{
+      transform: translateX(6px);
+      background-color: var(--accent);
+      border-radius: .35rem;
+      width: 4rem;
+   }
+   to{
+      transform: translateX(0px);
+      background-color: inherit;
+      border-radius: 1rem;
+      width: 100%;
+   }
+}
+@keyframes navToBig {
+   from{
+       width: 100%;
+       position: fixed;
+       margin: 0;
+       border-radius: 0;
+   }
+   to{
+       width: calc(100% - 2rem);
+       margin: 1rem;
+       border-radius: .75rem;
+       position: relative;
+   }
+}
+
+@keyframes navToSmall {
+   from{
+       width: calc(100% - 2rem);
+       margin: 1rem;
+       border-radius: .75rem;
+       position: relative;
+   }
+   to{
+       width: 100%;
+       position: fixed;
+       margin: 0;
+       border-radius: 0;
+   }
+}
+
+/*************************/
+/** Navbar popups        */
+/*************************/
+
+.navbarPopups{
+   position: fixed;
+   z-index: 9999;
+   width: 100vw;
+   height: 100vh;
+   display: flex;
+   justify-content: flex-end;
+   pointer-events: none;
+   animation: userPopupOpen ease-in-out;
+   transition: .4s;
+}
+.userPopup{
+   width: 25rem;
+   height: fit-content;
+   background-color: var(--secondary);
+   position: absolute;
+   right: 1rem;
+   border-radius: .75rem;
+   padding: .75rem;
+   margin-top: 6rem;
+   pointer-events: all;
+}
+
+.userPopupTitle{
+   display: inline-flex;
+   width: 100%;
+   justify-content: space-between;
+
+}
+.userPopupTitle svg{
+   cursor: pointer;
+}
+
+.userGrid{
+   display: grid;
+   grid-template-columns: 6rem 1fr;
+   grid-template-rows: 2rem 1fr;
+   margin-top: 1rem;
+   height: 6rem;
+}
+
+.userGrid h4{
+   align-self: center;
+   margin-left: 1rem;
+   font-weight: 600;
+}
+.userGrid img{
+   object-fit: cover;
+   border-radius: 50%;
+   width: 6rem;
+   grid-row-start: 1;
+   grid-row-end: 2;
+}
+.userGridBtn{
+   margin-left: 1rem;
+   grid-column: 2;
+   grid-row: 2;
+   align-self: flex-end;
+   margin-bottom: 1rem;
+   display: grid;
+   grid-template-columns: 2fr 1fr;
+   gap: .75rem;
+}
+.userGridBtn button{
+   background-color: var(--button);
+   border: none;
+   height: 2.5rem;
+   border-radius: .75rem;
+   transition: .3s;
+}
+.userGridBtn button:hover{
+   background-color: var(--accent);
+}
+
+/*************************/
+/** Dev menu styling     */
+/*************************/
+
+.navDevMenu{
+   margin-top: 1rem;
+}
+
+.navDevMenu section{
+   margin-top: .4rem;
+   margin-left: .6rem;
+}
+.navDevMenu section button{
+   color: var(--tx);
+   background-color: var(--button);
+   border: solid var(--button) 2px;
+   padding: .4rem;
+   border-radius: .5rem;
+   margin: .5rem 0;
+}
+.navDevMenu section input{
+   margin: 0 .5rem;
+   background-color: var(--input);
+   color: var(--tx);
+   border: solid var(--button) 2px;
+   padding: .5rem;
+   border-radius: .5rem;
+}
