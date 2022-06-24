@@ -12,7 +12,6 @@ const Navbar = () => {
    const currentPos = pageCode();
    const [isOpen, toggleState] = useState(false);
 	const [navStatus, setNavStatus] = useState(0); //0 no class, 1 fix, 2 scroll, 3 mobile, 4 mobile on scroll, 5 mobile w/ search, 6 mobile search close animation
-   const [searchKey, updateSearchKey] = useState("");
    const title = "PAGENAME";
 
    const toggleUserPopup = () => {
@@ -50,10 +49,8 @@ const Navbar = () => {
    useEffect(() => {
       window.addEventListener("scroll", (e) => navStatusHandler(e));
       if(deviceType().isMobile) setNavStatus(3);
-		window.addEventListener("hashchange", (e) => closeSearchMode(e));
       return  () => {
          window.removeEventListener("scroll", (e) => navStatusHandler(e));
-			window.removeEventListener("hashchange", (e) => closeSearchMode(e));
    };}, []);
 
    const goto = {
@@ -63,30 +60,6 @@ const Navbar = () => {
       adp: () => window.location.pathname = "/admin",
       loc: () => window.location.pathname = "/info"
    }
-
-   const openSearchMode = () => {
-      window.location.hash = "#cerca";
-      setNavStatus(5);
-   }
-
-   const closeSearchMode = (e) => {
-		let oldHash = e.oldURL.split("#")[1];
-		let newHash = e.newURL.split("#")[1];
-		if(oldHash==="cerca"){
-			setNavStatus(6);
-			wait(300).then(() => {setNavStatus(3);});
-		}
-		if(newHash==="cerca") return;
-   }
-
-   const search = () => {
-      if(!searchKey) return;
-      // let search = stringSanitizer(searchKey);
-      let path = window.location.origin + "/cerca?s=" + searchKey;
-      window.history.pushState({}, "", path);
-      window.location.reload();
-   }
-	
    //* ///////////////////////////
    //* JSX                      //
    //* ///////////////////////////
@@ -95,7 +68,7 @@ const Navbar = () => {
       <>
          
 			{deviceType().isMobile ? 
-               <><span className="navTopMarginMobile"></span>
+               <>
                <nav className={navStatus===5 ? "navSearchBar navMobile" : "navMobile"}>
                   <span aria-label="Home" className={navStatus === 5 ? "hidden" : navStatus === 6 ? "navIcon navIconFade" : currentPos===0 ? "navIcon navCurrentPos" : "navIcon"} onClick={goto.home}>
                      <HomeRounded />

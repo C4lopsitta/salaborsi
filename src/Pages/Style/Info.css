@@ -1,0 +1,6 @@
+.mapFrame{
+   margin: 0;
+   width: 100%;
+   aspect-ratio: 16 / 9;
+   border-radius: .4rem;
+}
